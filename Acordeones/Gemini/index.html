@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acordeón Gemini</title>
+
+    <style>
+        body {
+            background-color: #202124;
+            color: #e8eaed;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 2.5rem;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .accordion {
+            /* width: 100%; */
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .accordion-item {
+            background-color: #292a2d;
+            color: #fff;
+            margin: 10px 0;
+            overflow: hidden;
+            border: 1px solid #3a3b3f;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-item:hover {
+            background-color: #3a3b3f;
+            cursor: pointer;
+        }
+
+
+        .accordion-checkbox {
+            display: none;
+        }
+
+        .accordion-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            user-select: none;
+        }
+
+        /* Contenedor del ícono */
+        .accordion-title .icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+        }
+
+        .accordion-title .icon::before {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 2px;
+            background-color: #e8eaed;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-title .icon::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 2px;
+            background-color: #e8eaed;
+            transform: rotate(90deg);
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .accordion-checkbox:checked+.accordion-title .icon::after {
+            opacity: 0;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            transition: max-height 0.3s ease-out, padding-top 0.3s ease-out, padding-bottom 0.3s ease-out;
+        }
+
+        .accordion-checkbox:checked~.accordion-content {
+            max-height: 600px;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .accordion-content p {
+            margin-top: 0;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .accordion-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .accordion-content a {
+            color: #206dd9;
+            text-decoration: none;
+        }
+
+        .accordion-content a:hover {
+            color: #528ddf;
+            text-decoration: underline;
+        }
+    </style>
+
+    </style>
+</head>
+
+<body>
+
+    <div class="accordion">
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-1" class="accordion-checkbox">
+            <label for="accordion-1" class="accordion-title">
+                TITULO 1
+                <span class="icon"></span>
+            </label>
+            <div class="accordion-content">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis non minima odio sequi asperiores!
+                    Deleniti sint eius dolorum alias, saepe quia in consequatur obcaecati architecto est atque amet
+                    consectetur natus.
+                    <a href="#">Mas informacion</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-2" class="accordion-checkbox">
+            <label for="accordion-2" class="accordion-title">
+                TITULO 2
+                <span class="icon"></span>
+            </label>
+            <div class="accordion-content">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis non minima odio sequi asperiores!
+                    Deleniti sint eius dolorum alias, saepe quia in consequatur obcaecati architecto est atque amet
+                    consectetur natus.
+                    <a href="#">Mas informacion</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <input type="checkbox" id="accordion-3" class="accordion-checkbox">
+            <label for="accordion-3" class="accordion-title">
+                TITULO 3
+                <span class="icon"></span>
+            </label>
+            <div class="accordion-content">
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis non minima odio sequi asperiores!
+                    Deleniti sint eius dolorum alias, saepe quia in consequatur obcaecati architecto est atque amet
+                    consectetur natus.
+                    <a href="#">Mas informacion</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Seleccionamos todos los checkboxes del acordeón
+        const checkboxes = document.querySelectorAll('.accordion-checkbox');
+
+        checkboxes.forEach((checkbox) => {
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    // Desmarcamos todos los demás checkboxes
+                    checkboxes.forEach((other) => {
+                        if (other !== checkbox) {
+                            other.checked = false;
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

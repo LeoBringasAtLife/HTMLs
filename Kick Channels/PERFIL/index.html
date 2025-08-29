@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=TASA+Orbiter:wght@400..800&display=swap');
+        @import url(https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200);
+
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 48;
+        }
+
+        :root {
+            --color-primary: rgb(255, 0, 0);
+            --color-primary-hover: rgb(200, 0, 0);
+            --color-background: #121212;
+            --color-background-body: #202020;
+            --color-text: #F0F4F7;
+            --color-text-light: #F5F5F5;
+            --color-text-secondary: #A3A3B0;
+            --color-avatar-fallback: #333;
+            --color-border: #767676;
+            --color-selection-bg: #FF0000;
+            --color-selection-text: #FFFFFF;
+
+            --font-main: 'TASA Orbiter', Arial, Helvetica, sans-serif;
+            --font-icon: 'Material Symbols Outlined';
+
+            --text-size-username: 1.5rem;
+            --text-size-followers: 0.9rem;
+            --text-size-nav: 1rem;
+            --text-size-links: 1rem;
+            --text-size-live-tag: 0.5em;
+            --text-weight-normal: 400;
+            --text-weight-semibold: 600;
+            --text-weight-bold: 700;
+
+            --border-radius-avatar: 50%;
+            --border-radius-live-tag: 50px;
+            --border-width-avatar: 3px;
+            --border-width-nav-bottom: 2px;
+
+            --padding-container: 20px;
+            --padding-live-tag: 3px 7px;
+            --margin-profile-header: 20px;
+            --margin-links-bar-top: -5px;
+            --margin-links-bar-bottom: 10px;
+            --gap-profile-info: 4px;
+            --gap-profile-name: 8px;
+
+            --avatar-size: 90px;
+            --avatar-hover-opacity: 0.5;
+
+            --transition-hover: 0.3s ease-in-out;
+            --transition-opacity: 0.2s;
+
+            --nav-padding: 10px 15px;
+
+            --icon-size-default: 1.3rem;
+            --icon-size-camera: 20px;
+        }
+
+        ::selection {
+            background: var(--color-selection-bg);
+            color: var(--color-selection-text);
+        }
+
+        *,
+        *::after,
+        *::before {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--color-background-body);
+            color: var(--color-text);
+            font-family: var(--font-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .profile-container {
+            max-width: 1000px;
+            background-color: var(--color-background);
+            padding: var(--padding-container);
+            border: 1px solid var(--color-border);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--margin-profile-header);
+        }
+
+        .profile-avatar-container {
+            margin-right: 20px;
+            flex-shrink: 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        .camera-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: var(--border-radius-avatar);
+            padding: 5px;
+            display: none;
+            cursor: pointer;
+        }
+
+        .profile-avatar-container:hover .camera-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-avatar {
+            background-color: var(--color-avatar-fallback);
+            width: var(--avatar-size);
+            height: var(--avatar-size);
+            border-radius: var(--border-radius-avatar);
+            border: var(--border-width-avatar) solid var(--color-primary);
+            object-fit: cover;
+            transition: opacity var(--transition-opacity);
+        }
+
+        .profile-avatar-container:hover .profile-avatar {
+            opacity: var(--avatar-hover-opacity);
+        }
+
+        .profile-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex-grow: 1;
+            min-width: 0;
+            gap: var(--gap-profile-info);
+        }
+
+        .profile-name {
+            display: flex;
+            font-size: var(--text-size-username);
+            font-weight: var(--text-weight-semibold);
+            gap: var(--gap-profile-name);
+            align-items: center;
+            color: var(--color-text-light);
+        }
+
+        .profile-username {
+            font-size: var(--text-size-username);
+            font-weight: var(--text-weight-semibold);
+            color: var(--color-text-light);
+            transition: transform var(--transition-hover);
+        }
+
+        .profile-username:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .live-tag {
+            background: var(--color-primary);
+            color: #fff;
+            font-size: var(--text-size-live-tag);
+            font-weight: var(--text-weight-bold);
+            padding: var(--padding-live-tag);
+            border-radius: var(--border-radius-live-tag);
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .live-tag:hover {
+            background: var(--color-primary-hover);
+            cursor: pointer;
+        }
+
+        .profile-followers {
+            font-size: var(--text-size-followers);
+            color: var(--color-text-secondary);
+        }
+
+        .profile-links-bar {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin-top: var(--margin-links-bar-top);
+            margin-bottom: var(--margin-links-bar-bottom);
+        }
+
+        .profile-links-bar .material-symbols-outlined {
+            font-size: var(--icon-size-default);
+            margin-right: 5px;
+            color: var(--color-text-secondary);
+        }
+
+        .links-text {
+            font-size: var(--text-size-links);
+            color: var(--color-text-secondary);
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .links-text:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .profile-nav {
+            display: flex;
+            justify-content: space-around;
+            border-bottom: var(--border-width-nav-bottom) solid var(--color-border);
+        }
+
+        .nav-item {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            padding: var(--nav-padding);
+            position: relative;
+            font-size: var(--text-size-nav);
+            font-weight: var(--text-weight-normal);
+            text-align: center;
+            transition: color var(--transition-hover), border-color var(--transition-hover);
+        }
+
+        /* .nav-item:hover {
+            color: var(--color-primary);
+        } */
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: var(--border-width-nav-bottom);
+            background-color: var(--color-primary);
+        }
+
+        .nav-item:hover::after,
+        .nav-item.active::after {
+            width: 100%;
+        }
+
+        .nav-item.active {
+            color: var(--color-primary);
+        }
+
+        @media (max-width: 600px) {
+            .profile-header {
+                flex-direction: column;
+                align-items: center;
+                gap: 5px;
+            
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-avatar-container">
+                <img src="/images/yo.png" alt="Profile avatar" class="profile-avatar">
+                <div class="camera-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="var(--icon-size-camera)" viewBox="0 0 24 24"
+                        width="var(--icon-size-camera)" fill="#fff">
+                        <path d="M12 9c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3m0-1c-2.21 
+                    0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm2.59-4 2 2H21v12H3V6h4.41l2-2h5.18M15 
+                    3H9L7 5H2v14h20V5h-5l-2-2z"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="profile-info">
+                <h1 class="profile-name">
+                    <span class="profile-username">LeoBringasAtLife</span>
+                    <span class="live-tag">Live</span>
+                </h1>
+                <p class="profile-followers">999M followers</p>
+            </div>
+        </div>
+
+        <div class="profile-links-bar">
+            <span class="material-symbols-outlined">link</span>
+            <a href="#" class="links-text">Instagram.com and 2 more</a>
+        </div>
+
+        <div class="profile-nav">
+            <a href="#" class="nav-item active">Home</a>
+            <a href="#" class="nav-item">About</a>
+            <a href="#" class="nav-item">Videos</a>
+            <a href="#" class="nav-item">Clips</a>
+            <a href="#" class="nav-item">Chat</a>
+        </div>
+    </div>
+
+    <script>
+        const navLinks = document.querySelectorAll('.profile-nav .nav-item');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                navLinks.forEach(item => item.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canal YouTube</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=TASA+Orbiter:wght@400..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #121212;
+            color: #F0F4F7;
+            font-family: 'TASA Orbiter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .channel-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: #1C1C1C;
+            border: 1px solid #2C2C2C;
+            padding: 20px;
+            border-radius: 16px;
+            max-width: 555px;
+            width: 100%;
+        }
+
+        .channel-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid rgb(255, 0, 0);
+            object-fit: cover;
+        }
+
+        .channel-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 0;
+            flex-grow: 1;
+        }
+
+        .channel-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin: 0;
+        }
+
+        .subscriber-count {
+            font-size: 0.9rem;
+            color: #A3A3B0;
+            margin: 0;
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        /* Botón Suscribirme */
+        .subscribe-btn {
+            background: rgb(255, 0, 0);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            padding: 10px 18px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .subscribe-btn:hover {
+            background: rgb(200, 0, 0);
+        }
+
+        .subscribe-btn.subscribed {
+            background: #333;
+            color: #F0F4F7;
+            border: 1px solid #444;
+        }
+
+        .subscribe-btn.subscribed:hover {
+            background: #444;
+        }
+
+        /* Botón Unirme */
+        .join-btn {
+            background: transparent;
+            color: #F0F4F7;
+            border: 1px solid #767676;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            padding: 10px 18px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .join-btn:hover {
+            background: #2A2A2A;
+            border-color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="channel-card">
+        <img src="https://yt3.googleusercontent.com/nxYrc_1_2f77DoBadyxMTmv7ZpRZapHR5jbuYe7PlPd5cIRJxtNNEYyOC0ZsxaDyJJzXrnJiuDE=s160-c-k-c0x00ffffff-no-rj"
+            alt="Avatar del canal" class="channel-avatar">
+
+        <div class="channel-info">
+            <p class="channel-name">MrBeast</p>
+            <p class="subscriber-count">868 M suscriptores</p>
+        </div>
+
+        <div class="buttons-container">
+            <button class="subscribe-btn">Suscribirme</button>
+            <button class="join-btn">Unirme</button>
+        </div>
+    </div>
+
+    <script>
+        const subscribeBtn = document.querySelector(".subscribe-btn");
+        const subsCount = document.querySelector(".subscriber-count");
+
+        let subscribed = false;
+
+        subscribeBtn.addEventListener("click", () => {
+            subscribed = !subscribed;
+            subscribeBtn.textContent = subscribed ? "Suscrito" : "Suscribirme";
+            subscribeBtn.classList.toggle("subscribed", subscribed);
+            subsCount.textContent = subscribed ? "1 B suscriptores" : "868 M suscriptores";
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Toggle Switch Planes</title>
+    <style>
+        .toggle-switch {
+            position: relative;
+            display: inline-flex;
+            background: #121212;
+            padding: 5px;
+            width: 240px;
+            user-select: none;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .toggle-switch input[type="radio"] {
+            display: none;
+        }
+
+        .option {
+            flex: 1;
+            text-align: center;
+            padding: 8px 0;
+            cursor: pointer;
+            z-index: 2;
+            transition: color 0.3s;
+        }
+
+        .slider {
+            position: absolute;
+            top: 3px;
+            bottom: 3px;
+            width: 76px;
+            background: #f5f5f5;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+        }
+
+        #free:checked~.slider {
+            transform: translateX(0);
+        }
+
+        #free:checked~label[for="free"] {
+            color: #000;
+        }
+
+        #solo:checked~.slider {
+            transform: translateX(80px);
+        }
+
+        #solo:checked~label[for="solo"] {
+            color: #000;
+        }
+
+        #team:checked~.slider {
+            transform: translateX(161px);
+        }
+
+        #team:checked~label[for="team"] {
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="toggle-switch">
+        <input type="radio" name="plan" id="free" checked />
+        <input type="radio" name="plan" id="solo" />
+        <input type="radio" name="plan" id="team" />
+
+        <label for="free" class="option">Básico</label>
+        <label for="solo" class="option">Avanzado</label>
+        <label for="team" class="option">Corporativo</label>
+
+        <div class="slider"></div>
+    </div>
+</body>
+
+</html>

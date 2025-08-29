@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>YouTube Header Replica</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <style>
+        :root {
+            --bg-dark: #0f0f0f;
+            --bg-light: #ffffff;
+            --text-dark: #ffffff;
+            --text-light: #000000;
+            --subs-dark: #aaa;
+            --subs-light: #555;
+            --button-bg-dark: #222;
+            --button-bg-light: #e0e0e0;
+            --button-hover-dark: #444;
+            --button-hover-light: #c5c5c5;
+            --subscribed-bg: #ff0000;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f0f0f;
+            --text: #ffffff;
+            --subs: #aaa;
+            --button-bg: #222;
+            --button-hover: #444;
+            --header-bg: #1f1f1f;
+            /* más elegante que #606060 */
+        }
+
+        [data-theme="light"] {
+            --bg: #ffffff;
+            --text: #000000;
+            --subs: #555;
+            --button-bg: #e0e0e0;
+            --button-hover: #d5d5d5;
+            --header-bg: #f5f5f5;
+            /* más claro que #AAAAAA */
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        body,
+        .youtube-header {
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .youtube-header {
+            background-color: var(--header-bg);
+            color: var(--text);
+            padding: 16px 24px;
+            max-width: 600px;
+            box-sizing: border-box;
+            margin-top: 55px;
+        }
+
+        .youtube-header h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 10px 15px 0;
+            line-height: 1.5;
+        }
+
+        .channel-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .channel-text {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .name {
+            font-weight: 700;
+            font-size: 15px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .subs {
+            font-size: 12px;
+            color: var(--subs);
+            margin-top: 2px;
+            white-space: nowrap;
+        }
+
+        .join {
+            background-color: transparent;
+            color: var(--join-color);
+            border: 1px solid #888;
+            font-weight: 600;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .join:hover {
+            background-color: var(--join-hover-bg);
+            color: var(--join-hover-color);
+            border-color: var(--join-hover-border);
+            cursor: pointer;
+        }
+
+        [data-theme="dark"] {
+            --join-color: #fff;
+            --join-border: #888;
+            --join-hover-bg: #444;
+            --join-hover-color: #fff;
+            --join-hover-border: #bbb;
+        }
+
+        [data-theme="light"] {
+            --join-color: #000;
+            --join-hover-bg: #ccc;
+            --join-hover-color: #333;
+            --join-hover-border: #444;
+        }
+
+        button {
+            background-color: var(--button-bg);
+            color: var(--text);
+            border: none;
+            padding: 6px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.2s ease;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 8px;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: var(--button-hover);
+        }
+
+        .subscribed {
+            background-color: var(--subscribed-bg);
+            color: #ffffff;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+        }
+
+        [data-theme="dark"] .subscribed {
+            background-color: #e60000;
+        }
+
+        [data-theme="dark"] .subscribed:hover {
+            background-color: #e60000ea;
+        }
+
+        [data-theme="light"] .subscribed {
+            background-color: #e60000;
+            color: #fff;
+        }
+
+        [data-theme="light"] .subscribed:hover {
+            background-color: #f30000e0;
+        }
+
+        .theme-toggle {
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: var(--button-bg);
+            color: var(--text);
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--button-hover);
+        }
+
+        /* @media (max-width: 700px) {
+            .youtube-header {
+                width: 100%;
+                padding: 12px 16px;
+            }
+
+            .youtube-header h3 {
+                font-size: 18px;
+            }
+
+            .name {
+                font-size: 14px;
+            }
+
+            .subs {
+                font-size: 11px;
+            }
+
+            button {
+                padding: 5px 10px;
+                font-size: 13px;
+            }
+        } */
+    </style>
+</head>
+
+<p>
+    <div>
+        <div class="youtube-header">
+            <h3>Sobrevive 200 horas en completa oscuridad por $250,000</h3>
+            <div class="channel-info">
+                <img src="https://yt3.ggpht.com/nxYrc_1_2f77DoBadyxMTmv7ZpRZapHR5jbuYe7PlPd5cIRJxtNNEYyOC0ZsxaDyJJzXrnJiuDE=s48-c-k-c0x00ffffff-no-rj"
+                    alt="MrBeast" class="avatar" />
+                <div class="channel-text">
+                    <span class="name">MrBeast</span>
+                    <span class="subs">999M subscribers</span>
+                </div>
+                <button class="join">Join</button>
+                <button class="subscribed">Subscribed</button>
+            </div>
+        </div>
+
+        <button class="theme-toggle" onclick="toggleTheme()">Cambiar tema</button>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            icon.textContent = next === 'dark' ? 'light_mode' : 'dark_mode';
+        }
+    </script>
+</body>
+
+</html>

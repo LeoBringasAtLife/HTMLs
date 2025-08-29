@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat en Vivo Mejorado</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=TASA+Orbiter:wght@400..800&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'TASA Orbiter', sans-serif;
+            background: #121212ee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat {
+            width: 420px;
+            height: 500px;
+            background-color: #2c2c2c;
+            color: #FFF;
+            padding: 20px;
+            overflow-y: scroll;
+            border: 2px solid #868686;
+            border-radius: 10px;
+
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .chat::-webkit-scrollbar {
+            display: none;
+        }
+
+        .chat p {
+            margin: 8px 0;
+            padding: 6px 10px;
+            background-color: #1a1a1a;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chat" id="chatBox">
+        <!-- Persona 1 -->
+        <p>
+            <span class="user" style="color:#ff6b6b">Usuario-1</span>: ¡Hola a todos!
+        </p>
+        <!-- Persona 2 -->
+        <p>
+            <span class="user" style="color:#6bc1ff">Usuario-2</span>: ¿Qué onda? 👋
+        </p>
+        <!-- Persona 3 -->
+        <p>
+            <span class="user" style="color:#6bff9f">Usuario-3</span>: Hola chat...
+        </p>
+        <!-- Persona 4 -->
+        <p>
+            <span class="user" style="color:#e6ff6b">Usuario-4</span>: ¿Todo bien?
+        </p>
+        <!-- Persona 5 -->
+        <p>
+            <span class="user" style="color:#ffb36b">Usuario-5</span>: Bienvenidos a todos 🚀
+        </p>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chatBox');
+
+        // Lista de usuarios y colores
+        const users = [
+            { name: "Usuario-1", color: "#ff6b6b" },
+            { name: "Usuario-2", color: "#ffb36b" },
+            { name: "Usuario-3", color: "#6bff9f" },
+            { name: "Usuario-4", color: "#e6ff6b" },
+            { name: "Usuario-5", color: "#6bc1ff" },
+            { name: "Usuario-6", color: "#d36bff" },
+            { name: "Usuario-7", color: "#ff6bd9" },
+            { name: "Usuario-8", color: "#6bfff3" }
+        ];
+
+        // Mensajes aleatorios
+        const messages = [
+            "¡Hola, cómo andan?",
+            "Jajaja 😂",
+            "Estoy probando este chat",
+            "Qué bueno que anda!",
+            "¿De dónde son?",
+            "Me gusta este diseño 🔥",
+            "Esto parece real jajaja",
+            "Saludos a todos 🙌",
+            "Estoy comiendo mientras chateo 🍕"
+        ];
+
+        // Función para agregar un nuevo mensaje
+        function addMessage() {
+            const newMessage = document.createElement('p');
+            const randomUser = users[Math.floor(Math.random() * users.length)];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            newMessage.innerHTML = `<span class="user" style="color:${randomUser.color}">${randomUser.name}</span>: ${randomMsg}`;
+            chatBox.appendChild(newMessage);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // Agregar mensajes automáticos cada 1.5s
+        setInterval(addMessage, 1300);
+    </script>
+</body>
+
+</html>
